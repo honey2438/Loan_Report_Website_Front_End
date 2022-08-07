@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Register Form Start</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='include/style.css') }}">
+    <!-- <link rel="stylesheet" href="style.css"> -->
+</head>
+
+<body>
+    <div class="report-form">
+        <div class="form-header">
+            <h1>Loan Report Form</h1>
+        </div>
+
+
+        <div class="form-body">
+            <div class="group" id="group-name">
+                <div class="form-group">
+                    <label id="question1" for="name" class="label-title"></label>
+                    <input type="text" id="amount1" class="form-input" placeholder="Enter the amount"
+                        required="required" />
+                    <button class="btn" onclick="nextQuestion()" id="bussbtn">Save and Continue</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+   
+    var bussbtn = document.getElementById('bussbtn');
+    var groupName = document.getElementById('group-name');
+    let questionNumber = 0;
+    const questions = eval("{{ questions|safe }}");
+    const numberOfQuestions = questions.length;
+    let answerObject = {};
+    let answers = [];
+    console.log(questions);
+    var i = 1;
+    if (questionNumber == 0) {
+        const questionLabe = document.getElementById("question1");
+        questionLabe.textContent = questions[questionNumber]['question'];
+        console.log(questionLabe);
+    }
+
+    const nextQuestion = () => {
+        const answer = document.getElementById("amount"+i);
+        answerObject[questions[questionNumber]['question_key']] = answer.value;
+            answers.push(answerObject);
+            i++;
+        if (questionNumber < numberOfQuestions - 1) {
+           
+            var div = document.createElement('div');
+            div.setAttribute('class', 'form-group');
+            groupName.append(div);
+
+            var label = document.createElement('label');
+            label.setAttribute('id', 'question' + i);
+            label.setAttribute('for', 'name');
+            label.setAttribute('class', 'label-title');
+            div.append(label);
+
+            var input = document.createElement('input');
+            input.setAttribute('id', 'amount'+i);
+            input.setAttribute('class', 'form-input');
+            input.setAttribute('placeholder', 'Enter Amount');
+            input.setAttribute('required', 'required');
+            div.append(input);
+
+            groupName.appendChild(bussbtn);
+            const questionLabel = document.getElementById("question" + i);
+            console.log(questionLabel);
+            answerObject[questions[questionNumber]['question_key']] = answer.value;
+            answers.push(answerObject);
+            questionNumber++;
+            questionLabel.textContent = questions[questionNumber]['question'];
+        } else {
+            answerObject[questions[questionNumber]['question_key']] = answer.value;
+            answers.push(answerObject);
+            console.log(answerObject);
+            location.href = `/results?model=${window.location.href.split('/').reverse()[0]}&data=${JSON.stringify(answers)}`;
+        }
+    }
+
+    // questionLabel.textContent = questions[questionNumber]['question'];
+</script>
+
+</html>

@@ -1,0 +1,97 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan Report</title>
+    <link rel="stylesheet" href="include/index.css">
+</head>
+
+<body>
+    <header>
+        <div id="logo_box">
+            <img id="logo" src="include/img.webp" alt="">
+            <span id="title_logo">Loan Report</span>
+        </div>
+        <ul>
+            <li><a href="" class="header_list">Prices</a> </li>
+            <li><a href="" class="header_list"> Resources</a></li>
+            <li><a href="" class="header_list" id="list3"> Sign in</a></li>
+            <li><a href="" class="header_list"> Contact us</a></li>
+        </ul>
+    </header>
+    <main>
+        <img class="image" src="include/bg.png" alt="">
+        <div id="inner_container">
+            <div id="innermost_container">
+                <p id="primary">Looking for a bank loan ?</p>
+                <p id="secondary">Get your report in less than 10 minutes</p>
+            </div>
+            <form action="">
+                <label for="name">Name</label>
+                <input type="text" id="name">
+                <label for="mobile">Mobile no</label>
+                <input type="phone" id="mobile">
+                <label for="amount">Amount</label>
+                <select name="amount" id="amount">
+                    <option value="100000">Rs. 100000</option>
+                    <option value="200000">Rs. 200000</option>
+                    <option value="500000">Rs. 500000</option>
+                    <option value="1000000">Rs. 1000000</option>
+                </select>
+                <a href="#popup_container" id="form_btn" onclick="openPopup()">Submit</a>
+            </form>
+        </div>
+
+    </main>
+    <div id="popup_container">
+        <div id="popup">
+            <h6>Choose the Plan</h6>
+            <h2>How would you like to get started?</h2>
+            <div class="btns">
+                <a href="">
+                    <div class="boxes" id="box1">
+                        <h4>Option1</h4>
+                    </div>
+                </a>
+                <a href="http://45.90.223.35:5000/questions/7
+                ">
+                    <div class="boxes" id="box2">
+                        <h4>Option2</h4>
+                    </div>
+                </a>
+                <a href="">
+                    <div class="boxes" id="box3">
+                        <h4>Option3</h4>
+                    </div>
+                </a>
+
+            </div>
+            <div>
+                <button class="close_btn" onclick="closePopup()">Close</button>
+            </div>
+        </div>
+    </div>
+
+</body>
+<script>
+    let popup_container = document.getElementById("popup_container");
+    let mobile=document.getElementById("mobile");
+    let name=document.getElementById("name");
+
+    function openPopup() {
+        if(name.value!="" && mobile.value!=""){
+            popup_container.style.display = 'block';
+        }
+        else{
+            alert("Please fill all fields");
+        }
+       
+    }
+    function closePopup() {
+        popup_container.style.display = 'none';
+    }
+</script>
+
+</html>
